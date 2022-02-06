@@ -1,7 +1,7 @@
 pragma solidity ^0.8.4;
 
 contract escrow{
-    address admin;
+    address admin = msg.sender;
 
     mapping(address => uint256) public deposits;
 
@@ -10,9 +10,6 @@ contract escrow{
         _;
     }
 
-    constructor () public{
-        admin = msg.sender;
-    }
     function deposit (address payee) public confirmAdmin payable{
         uint256 amount = msg.value;
         deposits[payee] = deposits[payee] + amount;
